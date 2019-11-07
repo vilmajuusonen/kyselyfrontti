@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fi">
+    <head>
+        <title>Käyttäjäkysely</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="tyyli.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    
+    
+    <body>
+        <div class="container">
+        <div class="kuvaus">
+        <h1>Käyttäjäkysely Haaga-Helian kansainvälisyyspalveluista</h1>
+        <p>Tämän kyselyn tarkoituksena on kehittää Haaga-Helian kansainvälisyyspalveluita. Kysely on suunnattu Haaga-Helian Suomessa asuville opiskelijoille jotka ovat käyttäneet kansainvälisyyspalveluita.</p>
+        <p>Kansainvälisyyspalveluilla tarkoitetaan tässä yhteydessä MyNetistä löytyviä palveluita sekä
+        kansainvälisyyskoordinaattorien apua liittyen vaihto-opintoihin ja muihin kansainvälisiin aktiviteetteihin.</p>
+        <p>Kiitos kyselyyn osallistumisesta!</p>
+        </div>
+        </div>
+        <div class="container">    
+        <div class="kysely">
+            <h2 class="kysymys">Valitse oma koulutusohjelmasi tai kampuksesi:</h2>
+            <p><select id="koulutusohjelma" required>
+                        <option value="" disabled selected hidden>Koulutusohjelma...</option>
+                        <option value="haaga">Haagan kampuksen koulutusohjelmat</option>
+                        <option value="porvoo">Porvoon kampuksen koulutusohjelmat</option>
+                        <option value="vieru">Vierumäen kampuksen koulutusohjelmat</option>
+                        <option value="yamk">Helsingin ylemmän ammattikorkeakoulun ohjelmat (YAMK)</option>
+                        <option value="fina">Finanssi- ja talousasiantuntijan koulutusohjelma (FINA)</option>
+                        <option value="helim">Liiketalouden koulutusohjelma (Malmi, HELI-M)</option>
+                        <option value="helip">Liiketalouden koulutusohjelma (Pasila, HELI-P)</option>
+                        <option value="myynti">Myyntityön koulutusohjelma (MYYNTI)</option>
+                        <option value="globba">International Business (GLOBBA)</option>
+                        <option value="heti">Tietojenkäsittelyn koulutusohjelma (HETI)</option>
+                        <option value="bite">Degree Programme in Business Information Technology (BITE)</option>
+                        <option value="assi">Johdon assistenttityön ja kielten koulutusohjelma (ASSI)</option>
+                        <option value="joura">Journalismin koulutusohjelma (JOURA)</option>
+                        <option value="mubba">Degree Programme for Multilingual Management Assistants (MUBBA)</option>
+                    </select>
+            </p>
+            <h2 class="kysymys">Monettako vuotta opiskelet Haaga-Heliassa?</h2>
+            <p>
+                <input id="eka" type="radio" name="opintovuosi" value="1">
+                <label for="eka">Ensimmäistä</label><br>
+                <input id="toka" type="radio" name="opintovuosi" value="2">
+                <label for="toka">Toista</label><br>
+                <input id="kolmas" type="radio" name="opintovuosi" value="3">
+                <label for="kolmas">Kolmatta</label><br>
+                <input id="neljas" type="radio" name="opintovuosi" value="4">
+                <label for="neljas">Neljättä tai enemmän</label>
+            </p>
+           <!-- Pitäisi päättää tuleeko tämä kyssäri mukaan vai ei:
+
+            <br>Oletko käyttänyt Haaga-Helian kansainvälisyyspalveluita?<br>
+                <input id="kylla1" type="radio" name="kayttanyt" value="kylla1">
+                <label for="kylla1"></label><br>
+                <input id="ei1" type="radio" name="kayttanyt" value="ei1">
+                <label for="ei1"></label><br> -->
+            
+            <!-- Tämän osuuden voisi siis tehdä ehdolliseksi 2.kysymyksen vastauksen perusteella 
+
+            3. Oletko mielestäsi saanut riittävästi tietoa mahdollisuuksistasi vaihto-opiskeluun tai esim. 
+            työharjoitteluihin ulkomailla?
+            radio y/n
+            4. Koetko tietäväsi, mistä löytäisit halutessasi tietoa näihin liittyen?
+            radio y/n
+            5. Avointa palautetta kansainvälisyyspalveluiden saatavuudesta ja uusien opiskelijoiden tiedottamisesta?
+            avoin vastaus, optional
+
+            -->
+            
+            <h2 class="kysymys">Mihin tarkoitukseen olet käyttänyt kansainvälisyyspalveluita? (Voit valita useampia.)</h2>
+            <p>
+                <input id="vaihto1" type="checkbox" name="tarkoitus" required value="Vaihto-opinnot Haaga-Helian yhteistyökoulussa"><label for="vaihto1" class="syyt">Vaihto-opinnot Haaga-Helian yhteistyökoulussa</label><br>
+                <input id="vaihto2" type="checkbox" name="tarkoitus" required value="Vaihto-opinnot muussa kuin Haaga-Helian yhteistyökoulussa"><label for="vaihto2" class="syyt">Vaihto-opinnot muussa kuin Haaga-Helian yhteistyökoulussa</label><br>
+                <input id="kesa" type="checkbox" name="tarkoitus" required value="Kansainväliset kesäkurssit tai muut lyhyet kurssit ulkomailla"><label for="kesa" class="syyt">Kansainväliset kesäkurssit tai muut lyhyet kurssit ulkomailla</label><br>
+                <input id="efye" type="checkbox" name="tarkoitus" required value="Erasmus for Young Entrepreneurs"><label for="efye" class="syyt">Erasmus for Young Entrepreneurs</label><br>
+                <input id="harjoittelu" type="checkbox" name="tarkoitus" required value="Työharjoittelu ulkomailla"><label for="harjoittelu" class="syyt">Työharjoittelu ulkomailla</label><br>
+                <input id="doubledegree" type="checkbox" name="tarkoitus" required value="Double degree programs (kaksoistutkinto yhteistyökoulussa)"><label for="doubledegree" class="syyt">Double degree programs (kaksoistutkinto yhteistyökoulussa)</label>
+            </p>
+            <h2 class="kysymys">Mistä aiheista olet etsinyt tietoa MyNetistä kansainvälisyyspalveluiden sivuilta? (Voit valita useampia.)</h2>
+            <p>
+                <input id="yhteistyo" type="checkbox" name="yhteistyo" required value="Haaga-helian yhteistyökoulut"><label for="yhteistyo" class="aiheet">Haaga-Helian yhteistyökoulut</label><br>
+                <input id="vaihtotuet" type="checkbox" name="vaihtotuet" required value="Tuet vaihto-opiskelijoille"><label for="vaihtotuet" class="aiheet">Tuet vaihto-opiskelijoille</label><br>
+                <input id="kesatuet" type="checkbox" name="kesatuet" required value="Tuet kesäkursseille tai muille lyhyille kursseille"><label for="kesatuet" class="aiheet">Tuet kesäkursseille tai muille lyhyille kursseille</label><br>
+                <input id="harjoittelutuet" type="checkbox" name="harjoittelutuet" required value="Tuet työharjoitteluun ulkomaille"><label for="harjoittelutuet" class="aiheet">Tuet työharjoitteluun ulkomaille</label><br>
+                <input id="accesstuet" type="checkbox" name="accesstuet" required value="Esteettömyystuki"><label for="accesstuet" class="aiheet">Esteettömyystuki</label><br>
+                <input id="vakuutukset" type="checkbox" name="vakuutukset" required value="Vakuutukset ulkomailla"><label for="vakuutukset" class="aiheet">Vakuutukset ulkomailla</label><br>
+                <input id="hakuajat" type="checkbox" name="hakuajat" required value="Hakuajat ja tärkeät päivämäärät"><label for="hakuajat" class="aiheet">Hakuajat ja tärkeät päivämäärät</label><br>
+                <input id="terveys" type="checkbox" name="terveys" required value="Terveydenhuolto ulkomailla"><label for="terveys" class="aiheet">Terveydenhuolto ulkomailla</label><br>
+                <input id="tutorointi" type="checkbox" name="tutorointi" required value="Vaihto-oppilaiden tutorointi"><label for="tutorointi" class="aiheet">Vaihto-oppilaiden tutorointi</label><br>
+                <input id="kvjarjestot" type="checkbox" name="kvjarjestot" required value="Kansainväliset opiskelijajärjestöt"><label for="kvjarjestot" class="aiheet">Kansainväliset opiskelijajärjestöt</label><br>
+                <input id="raportit" type="checkbox" name="raportit" required value="Aiempien vaihto-oppilaiden vaihtoraportit"><label for="raportit" class="aiheet">Aiempien vaihto-oppilaiden vaihtoraportit</label><br>
+                <input id="raporttipohjat" type="checkbox" name="raporttipohjat" required value="Haaga-helian yhteistyökoulut"><label for="raporttipohjat" class="aiheet">Vaihtoraporttipohjat</label><br>
+                
+            </p>
+                <h2 class="kysymys">Kuinka helposti olet löytänyt etsimääsi tietoa? Valitse sopivin vaihtoehto vastakohtaparien välillä.</h2>
+            <p>
+                Huonosti
+                <input id="helppous1" type="radio" name="helppous" value="helppous1">
+                <input id="helppous2" type="radio" name="helppous" value="helppous2">
+                <input id="helppous3" type="radio" name="helppous" value="helppous3">
+                <input id="helppous4" type="radio" name="helppous" value="helppous4">
+                <input id="helppous5" type="radio" name="helppous" value="helppous4">
+                Erittäin helposti
+            </p>
+            
+            <!-- tässä siis sama kuin aiemmin eli rakenteesta voisi tehdä ehdollisen jos halutaan nämä
+            <br>Oletko ollut yhteydessä Haaga-Helian kansainvälisyyskoordinaattoreihin?<br>
+                <input id="kylla2" type="radio" name="koordinaattorit" value="kylla2">
+                <label for="kylla2"></label><br>
+                <input id="ei2" type="radio" name="koordinaattorit" value="ei2">
+                <label for="ei2"></label><br>
+
+            7. Jos kyllä, minkälaisissa asioissa olet tarvinnut apua koordinaattoreilta?
+            avoin vastaus, optional
+
+            tässä kyllä voisi ehkä olla vaan helpompaa kysyä toi seiskakysymys ja sinne voi sit vastata et en oo tarvinnut jos niikseen tulee
+            -->
+    
+            <h2 class="kysymys"> Avoin palaute kansainvälisyyspalveluista ja tiedon saatavuudesta MyNetissä</h2>
+            <p>
+                <textarea name="tarkoitus" rows="10" cols="30" placeholder="Anna halutessasi palautetta jos jotain on vielä mielessä. Oletko ollut tyytyväinen kansainvälisyyspalveluihin?"></textarea>
+            </p>
+            
+            <input onclick="sendFunction()" class="laheta" type="submit" value="Lähetä vastaukset">
+            <input class="peruuta" type="reset" value="Peruuta">
+            
+        </div>
+        </div>
+        
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- tämä skripti on checkboxeja varten. kaikki boxit on required kunnes käyttäjä klikkaa jotain niistä jolloin
+            required attribuutti poistetaan == pakko valita jotain mutta ei ole pakko valita kaikkia. ei vaikuta vielä mihkään kun vastauksia ei muutenkaan tarkisteta :D -->
+        <script>
+            $(function(){
+
+                var requiredCheckboxes = $(':checkbox[required]');
+
+                requiredCheckboxes.change(function(){
+
+                    if(requiredCheckboxes.is(':checked')) {
+                        requiredCheckboxes.removeAttr('required');
+                    }
+
+                    else {
+                        requiredCheckboxes.attr('required', 'required');
+                    }
+                });
+                
+            });
+            
+            function sendFunction() {
+              alert("Kiitos vastauksestasi!");
+            }
+        </script>
+    </body>
+</html>
