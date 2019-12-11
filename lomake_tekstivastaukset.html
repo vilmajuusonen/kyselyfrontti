@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fi">
+    <head>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152512250-1"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-152512250-1');
+            </script>
+        <title>Käyttäjäkysely</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="tyyli.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    
+    
+    <body>
+        <div class="container">
+        <div class="kuvaus">
+        <h1>Käyttäjäkysely Haaga-Helian kansainvälisyyspalveluista</h1>
+        <p>Tämän kyselyn tarkoituksena on kehittää Haaga-Helian kansainvälisyyspalveluita. Kysely on suunnattu Haaga-Helian Suomessa asuville opiskelijoille jotka ovat käyttäneet kansainvälisyyspalveluita.</p>
+        <p>Kansainvälisyyspalveluilla tarkoitetaan tässä yhteydessä MyNetistä löytyviä palveluita sekä
+        kansainvälisyyskoordinaattorien apua liittyen vaihto-opintoihin ja muihin kansainvälisiin aktiviteetteihin.</p>
+        <p>Kiitos kyselyyn osallistumisesta!</p>
+        </div>
+        </div>
+        <div class="container">    
+        <div class="kysely">
+            
+            <form id="kysely">
+            </form>
+            
+            <input onClick="lahetys()" class="laheta" type="submit" value="Lähetä vastaukset">
+            <input class="peruuta" type="reset" value="Peruuta">
+            
+        </div>
+        </div>
+        
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        
+        <!-- kysymysten hakeminen JSONista -->
+        
+        <script>
+            var lomakekentta = [];
+            $.getJSON("http://kyselypalvelu1.herokuapp.com/surveys", function(data){
+            var items = []; //tänne menee kysymykset
+            $.each(data[0].questions, function(key, d){
+                items.push("<h2 class='kysymys'>" + d.questionName + "</h2><p><input type=text id=" + d.questionId + "></p>" );
+                lomakekentta.push(d.questionId);
+            });
+                $("#kysely").append(items.join(" ") );
+            });
+            
+            // toimiva: var jsonData = [{"txtAnswer": "llolo","question": {"questionId": 1}}];
+        
+            function lahetys(){
+                var jsonData = [];
+                
+               for (i = 0; i < lomakekentta.length; i++) {
+                   jsonData.push({"txtAnswer":document.getElementById(lomakekentta[i]).value, "question":{"questionId":lomakekentta[i]}});
+              }
+                
+                document.getElementById("kysely").reset();
+
+                    var myJSON = JSON.stringify(jsonData); 
+                    console.log(myJSON);
+                    $.ajax({
+                        url: 'https://kyselypalvelu1.herokuapp.com/saveanswers',
+                        type: 'POST',
+                        dataType: 'application/json',
+                        contentType: 'application/json',
+                        data: myJSON,
+                        success: function() {alert('POST completed. Data: ' + myJSON)},
+                       error: function(xhr, status, error) {console.log(xhr.responseText +" "+ status +" "+ error);}
+                      });   
+                
+                alert("Vastaukset on lähetetty onnistuneesti. Kiitos vastauksistasi!");
+            }
+        </script>
+    </body>
+</html>
