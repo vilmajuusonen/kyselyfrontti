@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fi">
+    <head>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152512250-1"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-152512250-1');
+            </script>
+        <title>Käyttäjäkysely</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="tyyli.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    
+    
+    <body>
+        <div class="container">
+        <div class="kuvaus" id="kuvaus">
+        
+        </div>
+        </div>
+        <div class="container">    
+        <div class="kysely">
+            
+            <form id="kysely">
+            </form>
+            
+            <input onClick="lahetys()" class="laheta" type="submit" value="Lähetä vastaukset">
+            <input class="peruuta" type="reset" value="Peruuta">
+            
+        </div>
+        </div>
+        
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- tämä skripti on checkboxeja varten. kaikki boxit on required kunnes käyttäjä klikkaa jotain niistä jolloin
+            required attribuutti poistetaan == pakko valita jotain mutta ei ole pakko valita kaikkia. ei vaikuta vielä mihkään kun vastauksia ei muutenkaan tarkisteta :D -->
+        <script>
+            $(function(){
+            var requiredCheckboxes = $(':checkbox[required]');
+              requiredCheckboxes.change(function(){
+                    if(requiredCheckboxes.is(':checked')) {
+                        requiredCheckboxes.removeAttr('required');
+                    }
+                    else {
+                        requiredCheckboxes.attr('required', 'required');
+                    }
+                });
+                
+            });
+        </script>
+        <!-- kuvauksen ja otsikon hakeminen -->
+        
+        <script>
+            $.getJSON("http://kyselypalvelu2.herokuapp.com/surveys", function(data){     
+                var items = [];
+                // otsikko
+                items.push("<h1>" + data[0].surveyName + "</h1>");
+                // kuvaus
+                items.push("<p>" + data[0].explanation + "</p>");
+                $("#kuvaus").append( items.join("") );
+            });
+        </script>
+        
+        <!-- kysymysten hakeminen JSONista -->
+        
+        <script>
+            var lomakekentta = [];
+            $.getJSON("http://kyselypalvelu2.herokuapp.com/surveys", function(data){
+            var items = []; //tänne menee kysymykset
+            $.each(data[0].questions, function(key, d){
+                // varrataan kysymyksen tyyppi
+                var typeName = d.type.typeName;
+                var kysymysNro = d.questionId - 1;
+                // tsekataan if-rakenteella minkälaisesta kysymyksestä kyse
+                
+                if (typeName === 'text') {
+                items.push("<h2 class='kysymys'>" + d.questionName + "</h2><p><input type=text id=" + d.questionId + "></p>" )
+                }
+                else if (typeName === 'select') {
+                items.push("<h2 class='kysymys'>" + d.questionName + "</h2><p><select id='" + d.questionId + "' required> <option value= '' disabled selected hidden>" +d.questionName+ "</option>")
+                    $.each(data[0].questions[kysymysNro].options, function(key, d){
+                        items.push("<option value='" + d.optionId + "'> " + d.optionName + "</option>")
+                    });
+                items.push("</select></p>");
+                }
+                else if (typeName === 'radio') { 
+                    if (d.questionId === 5) {
+                    items.push("<h2 class='kysymys'>" + d.questionName + "</h2>");
+                    items.push("Huonosti");
+                        $.each(data[0].questions[kysymysNro].options, function(key, d){
+                            items.push("<input id='" + d.questionId + "' type='radio' name='" + d.questionId + "' value='" + d.optionId + "'>")
+                        });
+                    items.push("Erittäin helposti");
+                    }
+                    else {
+                    items.push("<h2 class='kysymys'>" + d.questionName + "</h2>") 
+                    $.each(data[0].questions[kysymysNro].options, function(key, d){
+                        items.push("<input id='" + d.questionId + "' type='radio' name='" + d.questionId + "' value='" + d.optionId + "' > <label for='" + d.optionId + "'>" + d.optionName + "</label><br>")
+                    });
+                    }
+                }
+                else if (typeName === 'checkbox') {
+                    items.push("<h2 class='kysymys'>" + d.questionName + "</h2>") 
+                    $.each(data[0].questions[kysymysNro].options, function(key, d){
+                        items.push("<input id='" + d.questionId + "' type='checkbox' name='" + d.questionId + "' value='" + d.optionId + "' > <label for='" + d.optionId + "'>" + d.optionName + "</label><br>")
+                    });
+                }
+                lomakekentta.push(d.questionId);
+                console.log(d.questionName);
+                console.log(typeName);
+            });
+                $("#kysely").append(items.join(" ") );
+            });
+            
+        function lahetys(){
+                var jsonData = [];
+                var tyyppi;
+                
+           for (i = 0; i < lomakekentta.length; i++) {
+               tyyppi=document.getElementById(lomakekentta[i]).type;
+               console.log(tyyppi);
+               //lisää tähän lomakenttien value-arvojen hakeminen
+               //muuta id-tunnukset ja value-arvot JSON-muotoon
+               //tulosta alert-ikkunassa ja lähetä JSON-muotoinen data 
+               
+               /*jsonData.push({"txtAnswer":document.getElementById(lomakekentta[i]).value, "question":{"questionId":lomakekentta[i]}, "selectedAnswers": [{"option": {"optionId": }}]}); */
+          };
+                
+                var myJSON = JSON.stringify(jsonData); 
+                console.log(myJSON);
+                $.ajax({
+                    url: 'https://kyselypalvelu2.herokuapp.com/saveanswers',
+                    type: 'POST',
+                    dataType: 'application/json',
+                    contentType: 'application/json',
+                    data: myJSON,
+                    success: function() {alert('POST completed. Data: ' + myJSON)},
+                   error: function(xhr, status, error) {console.log(xhr.responseText +" "+ status +" "+ error);}
+                });   
+        
+        //todo: tyhjennä lomakekentät ja kiitä vastauksista, siirtyy yhteenveto-sivulle -> visualisointi vastauksista
+        // window.open('lomake1.html', '_self', false)
+            }
+        </script>
+    </body>
+</html>
