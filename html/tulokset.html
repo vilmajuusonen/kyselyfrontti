@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fi">
+    <head>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152512250-1"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-152512250-1');
+            </script>
+        
+        <!--Load the AJAX API-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript">
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var jsonData = $.ajax({
+              url: "piirakka1.json",
+              dataType: "json",
+              async: false
+              }).responseText;
+          // Create our data table out of JSON data loaded from server.
+          var data = new google.visualization.DataTable(jsonData);
+         var options = {
+             title: 'Valitse oma koulutusohjelmasi tai kampuksesi: ',
+             width: '100%', 
+             height: 300, 
+             is3D: true,
+            };
+            
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.PieChart(document.getElementById('chart_div1'));
+          chart.draw(data, options);
+        }
+        
+        </script>
+        
+        <script type="text/javascript">
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var jsonData = $.ajax({
+              url: "piirakka2.json",
+              dataType: "json",
+              async: false
+              }).responseText;
+          // Create our data table out of JSON data loaded from server.
+          var data = new google.visualization.DataTable(jsonData);
+         var options = {
+             title: 'Monettako vuotta opiskelet Haaga-Heliassa? ',
+             width: '100%', 
+             height: 300, 
+             is3D: true,
+            };
+            
+          // Instantiate and draw our chart, passing in some options.
+          var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
+          chart.draw(data, options);
+        }
+        
+        </script>
+        
+            <script type="text/javascript">
+            google.charts.load('current', {packages: ['corechart', 'bar']});
+            google.charts.setOnLoadCallback(drawBasic);
+            function drawBasic() {
+                  var data = google.visualization.arrayToDataTable([
+                    ['Vastausvaihtoehto', 'Vastaajamäärä'],
+                    ['Vaihto-opinnot Haaga-Helian yhteistyökoulussa', 8],
+                    ['Vaihto-opinnot muussa kuin Haaga-Helian yhteistyökoulussa', 4],
+                    ['Kansainväliset kesäkurssit tai muut lyhyet kurssit ulkomailla', 12],
+                    ['Erasmus for Young Entrepreneurs', 2],
+                    ['Työharjoittelu ulkomailla', 19],
+                    ['Double degree programs (kaksoistutkinto yhteistyökoulussa)', 10],
+                    ]);
+                  var options = {
+                      title: 'Mihin tarkoitukseen olet käyttänyt kansainvälisyyspalveluita?',
+                      width: '100%',
+                      height: 700,
+                      legend: 'none',
+                    };
+                
+                  var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
+                  chart.draw(data, options);
+                }
+        </script>
+        
+        <script type="text/javascript">
+            google.charts.load('current', {packages: ['corechart', 'bar']});
+            google.charts.setOnLoadCallback(drawBasic);
+            function drawBasic() {
+                  var data = google.visualization.arrayToDataTable([
+                    ['Vastausvaihtoehto', 'Vastaajamäärä'],
+                    ['Haaga-Helian yhteistyökoulut', 10],
+                    ['Tuet vaihto-opiskelijoille', 15],
+                    ['Tuet kesäkursseille tai muille lyhyille kursseille', 6],
+                    ['Tuet työharjoitteluun ulkomaille', 12],
+                    ['Esteettömyystuki', 2],
+                    ['Vakuutukset ulkomailla', 12],
+                    ['Hakuajat ja tärkeät päivämäärät', 20],
+                    ['Terveydenhuolto ulkomailla', 2],
+                    ['Vaihto-oppilaiden tutorointi', 5],
+                    ['Kansainväliset opiskelijajärjestöt', 8],
+                    ['Aiempien vaihto-oppilaiden vaihtoraportit', 3],
+                    ['Vaihtoraporttipohjat', 11]
+                    ]);
+                  var options = {
+                      title: 'Mistä aiheista olet etsinyt tietoa MyNetistä kansainvälisyyspalveluiden sivuilta?',
+                      width: '100%',
+                      height: 700,
+                      legend: 'none',
+                    };
+                
+                  var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
+                  chart.draw(data, options);
+                }
+        </script>
+        
+        <title>Käyttäjäkysely</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="tyyli.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        
+  </head>
+  <body>
+      <div class="container">
+        <h1>Kiitos vastauksestasi!</h1>
+        <div id="chart_div1"></div>
+        <div id="chart_div2"></div>
+        <div id="chart_div3"></div>
+        <div id="chart_div4"></div>
+      </div>
+  </body>
+</html>
