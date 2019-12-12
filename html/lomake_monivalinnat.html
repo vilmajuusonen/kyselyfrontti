@@ -120,6 +120,12 @@
                 $("#kysely").append(items.join(" ") );
             });
             
+        function lahetys() {
+        window.open('tulokset.html', '_self', false) 
+        }
+          
+        /*  
+        // tässä koitetaan lähettää vastauksia palvelimelle, ei toimi
         function lahetys(){
                 var jsonData = [];
                 var tyyppi;
@@ -127,12 +133,11 @@
            for (i = 0; i < lomakekentta.length; i++) {
                tyyppi=document.getElementById(lomakekentta[i]).type;
                console.log(tyyppi);
-               //lisää tähän lomakenttien value-arvojen hakeminen
-               //muuta id-tunnukset ja value-arvot JSON-muotoon
-               //tulosta alert-ikkunassa ja lähetä JSON-muotoinen data 
+               // type-attribuutti oli muille paitsi select-kysymyksille undefined, ei selvinnyt miksi
                
-               /*jsonData.push({"txtAnswer":document.getElementById(lomakekentta[i]).value, "question":{"questionId":lomakekentta[i]}, "selectedAnswers": [{"option": {"optionId": }}]}); */
-          };
+               jsonData.push({"txtAnswer":document.getElementById(lomakekentta[i]).value, "question":{"questionId":lomakekentta[i]}, "selectedAnswers": [{"option": {"optionId": }}]}); 
+               // tähän muotoon json olisi pitänyt saada
+          }; 
                 
                 var myJSON = JSON.stringify(jsonData); 
                 console.log(myJSON);
@@ -145,10 +150,7 @@
                     success: function() {alert('POST completed. Data: ' + myJSON)},
                    error: function(xhr, status, error) {console.log(xhr.responseText +" "+ status +" "+ error);}
                 });   
-        
-        //todo: tyhjennä lomakekentät ja kiitä vastauksista, siirtyy yhteenveto-sivulle -> visualisointi vastauksista
-        // window.open('lomake1.html', '_self', false)
-            }
+        */
         </script>
     </body>
 </html>
